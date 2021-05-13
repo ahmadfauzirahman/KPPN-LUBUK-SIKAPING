@@ -39,13 +39,13 @@ class ServiceController extends ControllerBase
 
     // laporan keuangan list
 
-    public function actionListLaporanKeuangan($kode = null)
+    public function actionListLaporanKeuangan($id = null)
     {
 
-        if (is_null($kode)) {
+        if (is_null($id)) {
             $laporanKeuangan = LaporanKeuangan::find()->orderBy('tanggal_daftar DESC')->all();
         } else {
-            $laporanKeuangan = LaporanKeuangan::find()->where(['nomor_satker' => $kode])->orderBy('tanggal_daftar DESC')->all();
+            $laporanKeuangan = LaporanKeuangan::find()->where(['nomor_satker' => $id])->orderBy('tanggal_daftar DESC')->all();
         }
 
         if (count($laporanKeuangan) > 0) {
@@ -55,12 +55,12 @@ class ServiceController extends ControllerBase
         }
     }
 
-    public function actionKonfirmasi($kode = null)
+    public function actionKonfirmasi($id = null)
     {
-        if (is_null($kode)) {
+        if (is_null($id)) {
             $konfirmasi = KonfirmasiPenerimaan::find()->orderBy('tanggal_daftar DESC')->all();
         } else {
-            $konfirmasi = KonfirmasiPenerimaan::find()->where(['satker' => $kode])->orderBy('tanggal_daftar DESC')->all();
+            $konfirmasi = KonfirmasiPenerimaan::find()->where(['satker' => $id])->orderBy('tanggal_daftar DESC')->all();
         }
         if (count($konfirmasi) > 0) {
             return $this->writeResponse(true, 'Berhasil', $konfirmasi);
@@ -69,13 +69,12 @@ class ServiceController extends ControllerBase
         }
     }
 
-    public function actionSkpp($kode =  null)
+    public function actionSkpp($id =  null)
     {
-        // $skpp = Skpp::find()
-        if (is_null($kode)) {
+        if (is_null($id)) {
             $skpp = Skpp::find()->orderBy('tanggal_created DESC')->all();
         } else {
-            $skpp = Skpp::find()->where(['nomor_satker' => $kode])->orderBy('tanggal_created DESC')->all();
+            $skpp = Skpp::find()->where(['nomor_satker' => $id])->orderBy('tanggal_created DESC')->all();
         }
 
         if (count($skpp) > 0) {
@@ -85,12 +84,12 @@ class ServiceController extends ControllerBase
         }
     }
 
-    public function actionLpj($kode = null)
+    public function actionLpj($id = null)
     {
-        if (is_null($kode)) {
+        if (is_null($id)) {
             $lpj = Lpj::find()->orderBy('tanggal_daftar DESC')->all();
         } else {
-            $lpj = Lpj::find()->where(['nomor_satker' => $kode])->orderBy('tanggal_daftar DESC')->all();
+            $lpj = Lpj::find()->where(['nomor_satker' => $id])->orderBy('tanggal_daftar DESC')->all();
         }
 
         if (count($lpj) > 0) {
@@ -100,12 +99,12 @@ class ServiceController extends ControllerBase
         }
     }
 
-    public function actionTup($kode = null)
+    public function actionTup($id = null)
     {
-        if (is_null($kode)) {
+        if (is_null($id)) {
             $Tup = Tup::find()->orderBy('id_tup DESC')->all();
         } else {
-            $Tup = Tup::find()->where(['satker' => $kode])->orderBy('id_tup DESC')->all();
+            $Tup = Tup::find()->where(['satker' => $id])->orderBy('id_tup DESC')->all();
         }
 
         if (count($Tup) > 0) {
@@ -115,12 +114,12 @@ class ServiceController extends ControllerBase
         }
     }
 
-    public function actionKoreksi($kode = null)
+    public function actionKoreksi($id = null)
     {
-        if (is_null($kode)) {
+        if (is_null($id)) {
             $koreksi = KoreksiPenerimaan::find()->orderBy('tanggal_daftar DESC')->all();
         } else {
-            $koreksi = KoreksiPenerimaan::find()->where(['satker' => $kode])->orderBy('tanggal_daftar DESC')->all();
+            $koreksi = KoreksiPenerimaan::find()->where(['satker' => $id])->orderBy('tanggal_daftar DESC')->all();
         }
 
         if (count($koreksi) > 0) {

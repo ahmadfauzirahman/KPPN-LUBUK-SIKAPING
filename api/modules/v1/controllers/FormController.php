@@ -20,11 +20,12 @@ class FormController extends ControllerBase
 
         $kode_stakeholder = $p['nomor_satker'];
         $nomor_surat = $p['nomor_surat'];
+
         $model = new Skpp();
         $model->nomor_satker = $kode_stakeholder;
         $model->nomor_skpp = $nomor_surat;
         if ($model->save()) {
-            return $this->writeResponse(true, 'Berhasil Menyimpan', [Skpp::findOne(['nomor_surat' => $nomor_surat])]);
+            return $this->writeResponse(true, 'Berhasil Menyimpan', [Skpp::findOne(['nomor_skpp' => $nomor_surat])]);
         } else {
             return $this->writeResponse(false, 'Tidak Berhasil Menyimpan', []);
         }
@@ -57,8 +58,8 @@ class FormController extends ControllerBase
         $nomor_surat = $p['nomor_surat'];
         $model = new Lpj();
         $model->nomor_satker = $kode_stakeholder;
-        $model->nomor_skpp = $nomor_surat;
-        if ($model->save()) {
+        $model->nomor_surat = $nomor_surat;
+        if ($model->save(false)) {
             return $this->writeResponse(true, 'Berhasil Menyimpan', [Lpj::findOne(['nomor_surat' => $nomor_surat])]);
         } else {
             return $this->writeResponse(false, 'Tidak Berhasil Menyimpan', []);
@@ -74,7 +75,7 @@ class FormController extends ControllerBase
         $nomor_surat = $p['nomor_surat'];
         $model->satker = $kode_stakeholder;
         $model->nomor_surat = $nomor_surat;
-        if ($model->save()) {
+        if ($model->save(false)) {
             return $this->writeResponse(true, 'Berhasil Menyimpan', [KoreksiPenerimaan::findOne(['nomor_surat' => $nomor_surat])]);
         } else {
             return $this->writeResponse(false, 'Tidak Berhasil Menyimpan', [$model->errors]);
@@ -105,8 +106,10 @@ class FormController extends ControllerBase
         $nomor_surat = $p['nomor_surat'];
         $model = new LaporanKeuangan();
         $model->nomor_satker = $kode_stakeholder;
-        $model->nomor_skpp = $nomor_surat;
-        if ($model->save()) {
+        $model->nomor_surat = $nomor_surat;
+        $model->is_sekretaris = "No";
+        $model->is_vera = "No";
+        if ($model->save(false)) {
             return $this->writeResponse(true, 'Berhasil Menyimpan', [LaporanKeuangan::findOne(['nomor_surat' => $nomor_surat])]);
         } else {
             return $this->writeResponse(false, 'Tidak Berhasil Menyimpan', []);
